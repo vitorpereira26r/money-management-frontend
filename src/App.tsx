@@ -1,12 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Route, Routes } from "react-router-dom"
+import { Navbar } from "./components/Navbar/Navbar"
+import { Home } from "./Pages/Home/Home"
+import { Login } from "./Pages/Login/Login"
+import { UserAccess } from "./Pages/User/UserAccess"
+import { RequireAuth } from "./contexts/Auth/RequiteAuth"
 
 function App() {
 
   return (
     <div>
-      <h1 className='h1'>hello world</h1>
+      <Navbar/>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/user" element={<RequireAuth><UserAccess/></RequireAuth>}/>
+      </Routes>
     </div>
   )
 }
