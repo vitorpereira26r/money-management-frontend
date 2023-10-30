@@ -1,4 +1,5 @@
 import axios from "axios";
+import { UserRegistration } from "../entities/User/User";
 
 const api = axios.create({
     baseURL: "http://localhost:8080"
@@ -25,9 +26,15 @@ export const userApi = () => ({
         return null;
     },
 
-    register: async (username: string, password: string) => {
-        const response = await api.post("/auth/register", { username, password });
-        return response.data;
+    register: async (user: UserRegistration) => {
+        const response = await api.post("/auth/register", user);
+
+        console.log(response);
+
+        if(response.status === 200){
+            return true;
+        }
+        return false;
     },
 
     login: async (username: string, password: string) => {

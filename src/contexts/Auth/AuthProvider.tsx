@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { User, UserLoginResponse } from "../../entities/User/User";
+import { User, UserLoginResponse, UserRegistration } from "../../entities/User/User";
 import { AuthContext } from "./AuthContext";
 import { userApi } from "../../hooks/userApi";
 
@@ -35,6 +35,15 @@ export const AuthProvider = ({ children }: {children: JSX.Element}) => {
         }
         return false;
     }
+    
+    const register = async (user: UserRegistration) => {
+        console.log(user);
+        const data = await api.register(user);
+
+        console.log(data);
+
+        return data;
+    }
 
     const setToken = (token: string) => {
         localStorage.setItem("token", token);
@@ -52,7 +61,7 @@ export const AuthProvider = ({ children }: {children: JSX.Element}) => {
 
     return (
         <AuthContext.Provider
-            value={{user, login, logout}}
+            value={{user, login, register, logout}}
         >
             {children}
         </AuthContext.Provider>
