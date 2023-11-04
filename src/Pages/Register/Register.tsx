@@ -8,15 +8,10 @@ export const Register: React.FC = () => {
   const navigate = useNavigate();
 
   const[username, setUsername] = useState<string>("");
-  const[email, setEmail] = useState<string>("");
   const[password, setPassword] = useState<string>("");
 
   const handleUsernameInput = (event: ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
-  }
-  
-  const handleEmailInput = (event: ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
   }
 
   const handlePasswordInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -25,12 +20,11 @@ export const Register: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     console.log("opa")
-    console.log("username: " + username + " email: " + email + " password: " + password);
+    console.log("username: " + username + " password: " + password);
     e.preventDefault();
-    if(username && email && password){
+    if(username && password){
         const user: UserRegistration = {
             username: username,
-            email: email,
             password: password
         }
 
@@ -58,20 +52,6 @@ export const Register: React.FC = () => {
             name="username"
             value={username}
             onChange={handleUsernameInput}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="email"
-            name="email"
-            value={email}
-            onChange={handleEmailInput}
             required
           />
         </div>

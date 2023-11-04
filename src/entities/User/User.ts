@@ -12,7 +12,6 @@ export type UserLogin = {
 
 export type UserRegistration = {
     username: string,
-    email: string,
     password: string
 }
 
