@@ -14,7 +14,7 @@ export const Navbar: React.FC = () => {
       <nav className="navbar navbar-expand-lg bg-dark bg-body-tertiary" data-bs-theme="dark">
         <div className="container-fluid">
           <a className='navbar-brand' href="/">
-            <img src="public\logo\moneymanagementiconfbg.png" width="50" height="50" alt="logo" />
+            <img src="/logo/moneymanagementiconfbg.png" width="50" height="50" alt="logo" />
           </a>
           <a className="navbar-brand" href="/">Noteworthy Finance</a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

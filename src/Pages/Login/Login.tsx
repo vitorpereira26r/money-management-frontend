@@ -26,7 +26,7 @@ export const Login: React.FC = () => {
     if(username && password){
       const isLogged = await auth.login(username, password);
       if(isLogged){
-        navigate("/user");
+        navigate("/home");
       }
       else{
         setShowAlert(true);

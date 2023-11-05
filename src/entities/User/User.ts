@@ -2,7 +2,8 @@
 export type User = {
     id: number,
     username: string,
-    password: string
+    password: string,
+    balance: number
 }
 
 export type UserLogin = {
