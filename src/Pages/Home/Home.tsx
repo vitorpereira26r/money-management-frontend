@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../contexts/Auth/AuthContext';
 import { Accounts } from '../../components/Accounts/Accounts';
+import { UserTransactions } from '../../components/UserTransactions/UserTransactions';
 
 export const Home: React.FC = () => {
 
@@ -25,6 +26,7 @@ export const Home: React.FC = () => {
       <p className="text-muted">Overall Balance</p>
       <p className={`font-weight-bold ${balanceColorClass}`}>$ {formattedBalance}</p>
       <Accounts />
+      <UserTransactions/>
     </div>
   )
 }

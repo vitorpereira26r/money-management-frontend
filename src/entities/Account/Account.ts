@@ -3,3 +3,8 @@ export type Account = {
     name: string,
     balance: number
 }
+
+export type CreateAccountDto = {
+    name: string,
+    userId: number
+}

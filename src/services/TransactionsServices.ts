@@ -1,21 +1,16 @@
 import axios from "axios";
-import { Account, CreateAccountDto } from "../entities/Account/Account";
+import { TransactionCreateDto, TransactionEditDto } from "../entities/Transaction/Transaction";
 
 const api = axios.create({
     baseURL: "http://localhost:8080"
 });
 
-export const accountApi = () => ({
-    createAccount: async (name: string, userId: number) => {
+export const transactionApi = () => ({
+    createTransaction: async (newTransaction: TransactionCreateDto) => {
 
         const token = localStorage.getItem("token");
 
-        const newAccount: CreateAccountDto = {
-            name: name,
-            userId: userId
-        }
-
-        const response = await api.post("/app/account/create", newAccount, {
+        const response = await api.post("/app/transaction/create", newTransaction, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -25,16 +20,16 @@ export const accountApi = () => ({
         console.log(response.data);
 
         if(response && response.status === 200 && response.data){
-            return response;
+            return response.data;
         }
         return null;
     },
 
-    getAccountsByUserId: async (id: number) => {
+    getTransactionsByUserId: async (id: number) => {
 
         const token = localStorage.getItem("token");
 
-        const response = await api.get("/app/accounts/user-id/" + id, {
+        const response = await api.get("/app/transactions/user-id/" + id, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -49,11 +44,30 @@ export const accountApi = () => ({
         return null;
     },
 
-    editAccount: async (account: Account) => {
+    getTransactionsByAccountId: async (id: number) => {
 
         const token = localStorage.getItem("token");
 
-        const response = await api.put("/app/account/edit/" + account.id, account, {
+        const response = await api.get("/app/transactions/account-id/" + id, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        console.log(response.status);
+        console.log(response.data);
+
+        if(response.status === 200 && response.data){
+            return response.data;
+        }
+        return null;
+    },
+
+    editTransaction: async (transaction: TransactionEditDto, id: number) => {
+
+        const token = localStorage.getItem("token");
+
+        const response = await api.put("/app/transaction/edit/" + id, transaction, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -72,7 +86,7 @@ export const accountApi = () => ({
 
         const token = localStorage.getItem("token");
 
-        const response = await api.delete("/app/account/delete/" + id, {
+        const response = await api.delete("/app/transaction/delete/" + id, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
