@@ -31,6 +31,9 @@ export const Navbar: React.FC = () => {
               {!auth.user && <li className='nav-item'>
                 <a className='nav-link' href="/register">Register</a>
               </li>}
+              {auth.user && <li className='nav-item'>
+                <a className='nav-link' href="/transactions">Transactions</a>
+              </li>}
               {auth.user && <li className="nav-item">
                 <a className="nav-link" href="/" onClick={handleLogout}>Logout</a>
               </li>}

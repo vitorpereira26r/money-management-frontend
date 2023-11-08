@@ -10,30 +10,42 @@ export const Register: React.FC = () => {
   const[username, setUsername] = useState<string>("");
   const[password, setPassword] = useState<string>("");
 
+  const[usernameLengthOk, setUsernameLengthOk] = useState<boolean>(true);
+  const[passwordLengthOk, setPasswordLengthOk] = useState<boolean>(true);
+
   const handleUsernameInput = (event: ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
+    setUsernameLengthOk(true);
   }
 
   const handlePasswordInput = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
+    setPasswordLengthOk(true);
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    console.log("opa")
-    console.log("username: " + username + " password: " + password);
-    e.preventDefault();
-    if(username && password){
+    e.preventDefault()
+
+    if(username.length < 2 || username.length > 40){
+      setUsernameLengthOk(false);
+    }
+    else if(password.length < 8 || password.length > 40){
+      setPasswordLengthOk(false);
+    }
+    else{
+      if(username && password && username != "" && password != ""){
         const user: UserRegistration = {
             username: username,
             password: password
-        }
-
-        console.log(user);
-
-        const isRegistered = await auth.register(user);
-        if(isRegistered){
+          }
+          
+          console.log(user);
+          
+          const isRegistered = await auth.register(user);
+          if(isRegistered){
             navigate("/login");
-        }
+          }
+      }
     }
   }
 
@@ -47,13 +59,18 @@ export const Register: React.FC = () => {
           </label>
           <input
             type="text"
-            className="form-control"
+            className={`form-control ${!usernameLengthOk ? "is-invalid" : ""} mb-2`}
             id="username"
             name="username"
             value={username}
             onChange={handleUsernameInput}
             required
           />
+          {!usernameLengthOk && (
+            <div className="alert alert-danger" role="alert">
+              Username must have between 2 and 40 characters.
+            </div>
+          )}
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">
@@ -61,13 +78,18 @@ export const Register: React.FC = () => {
           </label>
           <input
             type="password"
-            className="form-control"
+            className={`form-control ${!passwordLengthOk ? "is-invalid" : ""} mb-2`}
             id="password"
             name="password"
             value={password}
             onChange={handlePasswordInput}
             required
           />
+          {!passwordLengthOk && (
+            <div className="alert alert-danger" role="alert">
+              Password must have between 8 and 40 characters.
+            </div>
+          )}
         </div>
         <button type="submit" className="btn btn-primary">
           Register

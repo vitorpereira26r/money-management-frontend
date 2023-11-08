@@ -156,6 +156,9 @@ export const UserTransactions: React.FC = () => {
 
   return (
     <div className="container mt-4">
+      <button className='btn btn-outline-secondary'>
+        <a href="/home" className='nav-link'>Back to home page</a>
+      </button>
       <h2>{auth.user?.username}'s transactions</h2>
       <button className="btn btn-success mb-3" onClick={openCreateModal}>Create Transaction</button>
       <div className="row">

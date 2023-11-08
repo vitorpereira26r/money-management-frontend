@@ -58,7 +58,8 @@ export const CreateTransactionModal: React.FC<ModalProps> = ({ title, isOpen, on
     console.log(categories);
   }, [isOpen]);
 
-  const handleCreateTransaction = () => {
+  const handleCreateTransaction = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if(accountToCreate && category && type !== "" && amount > 0 && description !== ""){
         const newTransaction: TransactionCreateDto = {
             type: type,
@@ -82,7 +83,7 @@ export const CreateTransactionModal: React.FC<ModalProps> = ({ title, isOpen, on
         isOpen={isOpen}
         onClose={onClose}
     >
-        <form>
+        <form onSubmit={(event) => handleCreateTransaction(event)}>
         <div className="form-group">
           <label htmlFor="amount">Amount</label>
           <input
@@ -162,9 +163,8 @@ export const CreateTransactionModal: React.FC<ModalProps> = ({ title, isOpen, on
           </div>
         )}
         <button
-          type="button"
+          type="submit"
           className="btn btn-primary"
-          onClick={handleCreateTransaction}
         >
           Create Transaction
         </button>

@@ -21,9 +21,11 @@ export const Login: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("handling submit");
-    console.log("username: " + username + ", password: " + password);
-    if(username && password){
+    if(username === "" || password === ""){
+      setInputNotFilled(true);
+      return;
+    }
+    if(username && password && username != "" && password != ""){
       const isLogged = await auth.login(username, password);
       if(isLogged){
         navigate("/home");
@@ -75,7 +77,7 @@ export const Login: React.FC = () => {
       </form>
       {showAlert && 
       <div className="alert alert-danger mt-3" role="alert">
-          Couldn't Login
+          Username or Password is incorrect
       </div>}
       {inputNotFilled && 
       <div className="alert alert-danger mt-3" role="alert">

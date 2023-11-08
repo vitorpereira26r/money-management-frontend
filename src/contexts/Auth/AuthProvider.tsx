@@ -25,8 +25,11 @@ export const AuthProvider = ({ children }: {children: JSX.Element}) => {
         console.log("username: " + username + ", password: " + password);
         const data: UserLoginResponse = await api.login(username, password);
 
+        if(data.user === null){
+            return false;
+        }
+
         console.log(data)
-        console.log("balance: "+data.user.balance);
 
         if(data.user && data.token){
             setUser(data.user);
