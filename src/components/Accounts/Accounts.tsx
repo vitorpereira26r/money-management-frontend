@@ -66,9 +66,12 @@ export const Accounts: React.FC = () => {
       try {
         const response = await api.editAccount(accountToEdit);
   
-        if (response.status === 200) {
-          editAccountToList(response.data);
-        } 
+        if(response){
+          console.log("response.status"+response.status)
+          if (response.status === 200) {
+            editAccountToList(accountToEdit);
+          } 
+        }
       } catch (error) {
         console.error("Erro ao atualizar a conta:", error);
       }

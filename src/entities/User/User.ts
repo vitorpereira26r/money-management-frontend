@@ -20,3 +20,8 @@ export interface UserLoginResponse {
     user: User,
     token: string
 }
+
+export type UserEditDto = {
+    username: string,
+    password: string
+}

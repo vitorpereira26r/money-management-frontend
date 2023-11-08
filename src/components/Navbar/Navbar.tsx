@@ -14,7 +14,7 @@ export const Navbar: React.FC = () => {
       <nav className="navbar navbar-expand-lg bg-dark bg-body-tertiary" data-bs-theme="dark">
         <div className="container-fluid">
           <a className='navbar-brand' href="/">
-            <img src="/logo/moneymanagementiconfbg.png" width="50" height="50" alt="logo" />
+            <img className="rounded float-start" src="/logo/icon.jpg" width="50" height="50" alt="logo" />
           </a>
           <a className="navbar-brand" href="/">Noteworthy Finance</a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,6 +33,9 @@ export const Navbar: React.FC = () => {
               </li>}
               {auth.user && <li className='nav-item'>
                 <a className='nav-link' href="/transactions">Transactions</a>
+              </li>}
+              {auth.user && <li className='nav-item'>
+                <a className='nav-link' href="/user-config">Settings</a>
               </li>}
               {auth.user && <li className="nav-item">
                 <a className="nav-link" href="/" onClick={handleLogout}>Logout</a>

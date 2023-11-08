@@ -63,7 +63,7 @@ export const accountApi = () => ({
         console.log(response.data);
 
         if(response.status === 200 && response.data){
-            return response.data;
+            return response;
         }
         return null;
     },

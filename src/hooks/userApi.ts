@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UserRegistration } from "../entities/User/User";
+import { UserEditDto, UserRegistration } from "../entities/User/User";
 
 const api = axios.create({
     baseURL: "http://localhost:8080"
@@ -45,5 +45,40 @@ export const userApi = () => ({
 
     logout: async () => {
 
+    },
+
+    editUser: async (user: UserEditDto, id: number) => {
+
+        const token = localStorage.getItem("token");
+
+        const response = await api.put("/user/edit/" + id, user, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        console.log(response.status);
+        console.log(response.data);
+
+        if(response && response.status === 200 && response.data){
+            return response.data;
+        }
+        return null;
+    },
+
+    deleteUser: async (id: number) => {
+
+        const token = localStorage.getItem("token");
+
+        const response = await api.delete("/user/delete/" + id, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        console.log(response.status);
+        console.log(response.data);
+
+        return response;
     }
 });

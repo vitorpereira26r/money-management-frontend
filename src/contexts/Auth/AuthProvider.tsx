@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { User, UserLoginResponse, UserRegistration } from "../../entities/User/User";
+import { User, UserEditDto, UserLoginResponse, UserRegistration } from "../../entities/User/User";
 import { AuthContext } from "./AuthContext";
 import { userApi } from "../../hooks/userApi";
 
@@ -49,6 +49,37 @@ export const AuthProvider = ({ children }: {children: JSX.Element}) => {
         return data;
     }
 
+    const editUser = async (user: UserEditDto, id: number) => {
+        const data = await api.editUser(user, id);
+
+        if(data){
+            console.log("user edited: " + data.username);
+            userEditData(data.username, data.password);
+            return true;
+        }
+        return false;
+    }
+
+    const userEditData = (username: string, password: string) => {
+        if(user){
+            const newUser: User = {
+                username: username,
+                password: password,
+                balance: user?.balance,
+                id: user?.id
+            }
+
+            console.log("newUserEdit: " + newUser);
+
+            setUser(newUser);
+        }
+    }
+
+    const deleteUser = async (id: number) => {
+        await api.deleteUser(id);
+        logout();
+    }
+
     const setToken = (token: string) => {
         localStorage.setItem("token", token);
     }
@@ -65,7 +96,7 @@ export const AuthProvider = ({ children }: {children: JSX.Element}) => {
 
     return (
         <AuthContext.Provider
-            value={{user, login, register, logout}}
+            value={{user, login, register, logout, editUser, deleteUser}}
         >
             {children}
         </AuthContext.Provider>
