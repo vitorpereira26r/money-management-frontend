@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Navbar } from "./components/Navbar/Navbar"
 import { Login } from "./Pages/Login/Login"
 import { UserAccess } from "./Pages/User/UserAccess"
@@ -14,15 +14,17 @@ function App() {
   return (
     <div>
       <Navbar/>
-      <Routes>
-        <Route path="/" element={<LandingPage/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/register" element={<Register/>}/>
-        <Route path="/user" element={<RequireAuth><UserAccess/></RequireAuth>}/>
-        <Route path="/home" element={<RequireAuth><Home/></RequireAuth>}/>
-        <Route path="/transactions" element={<RequireAuth><TransactionsPage/></RequireAuth>}/>
-        <Route path="/user-config" element={<RequireAuth><UserConfig/></RequireAuth>}/>
-      </Routes>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/register" element={<Register/>}/>
+          <Route path="/user" element={<RequireAuth><UserAccess/></RequireAuth>}/>
+          <Route path="/home" element={<RequireAuth><Home/></RequireAuth>}/>
+          <Route path="/transactions" element={<RequireAuth><TransactionsPage/></RequireAuth>}/>
+          <Route path="/user-config" element={<RequireAuth><UserConfig/></RequireAuth>}/>
+        </Routes>
+      </Router>
     </div>
   )
 }
