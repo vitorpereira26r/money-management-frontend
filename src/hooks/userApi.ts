@@ -2,7 +2,7 @@ import axios from "axios";
 import { UserEditDto, UserRegistration } from "../entities/User/User";
 
 const api = axios.create({
-    baseURL: "http://localhost:8080"
+    baseURL: "https://money-management-spring-boot-vitor.onrender.com"
 });
 
 export const userApi = () => ({
