@@ -8,13 +8,13 @@ interface ModalProps {
 }
 
 export const Modal: React.FC<ModalProps> = ({ title, isOpen, onClose, children }) => {
-  const overlayRef = React.useRef(null);
-
+  //const overlayRef = React.useRef(null);
+/*
   const handleOverlayClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     if (e.target === overlayRef.current) {
       onClose();
     }
-  }
+  }*/
 
   if (!isOpen) {
     return null;
