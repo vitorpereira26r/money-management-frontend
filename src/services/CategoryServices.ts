@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://money-management-spring-boot-vitor.onrender.com"
+    baseURL: "https://money-management1-3ec26d927640.herokuapp.com"
 });
 
 export const categoryApi = () => ({
