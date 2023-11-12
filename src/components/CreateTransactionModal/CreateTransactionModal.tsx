@@ -22,7 +22,7 @@ export const CreateTransactionModal: React.FC<ModalProps> = ({ title, isOpen, on
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [accounts, setAccounts] = useState<Account[]>([]);
-  const [amount, setAmount] = useState(0.0);
+  const [amount, setAmount] = useState<string>("");
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
   const [accountToCreate, setAccountToCreate] = useState<Account|null>(null);
@@ -31,7 +31,7 @@ export const CreateTransactionModal: React.FC<ModalProps> = ({ title, isOpen, on
   const [isFormValid, setIsFormValid] = useState(true);
 
   useEffect(() => {
-    setAmount(0.0);
+    setAmount("");
     setType("");
     setDescription("");
     setAccountToCreate(null);
@@ -60,10 +60,19 @@ export const CreateTransactionModal: React.FC<ModalProps> = ({ title, isOpen, on
 
   const handleCreateTransaction = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if(accountToCreate && category && type !== "" && amount > 0 && description !== ""){
+    const parsedAmount = parseFloat(amount.replace(',', '.'));
+
+    if(
+      accountToCreate &&
+      category &&
+      type !== "" &&
+      description !== "" &&
+      !isNaN(parsedAmount) &&
+      parsedAmount > 0
+    ){
         const newTransaction: TransactionCreateDto = {
             type: type,
-            amount: amount,
+            amount: parsedAmount,
             description: description,
             accountId: accountToCreate?.id,
             userId: -1,
@@ -87,11 +96,13 @@ export const CreateTransactionModal: React.FC<ModalProps> = ({ title, isOpen, on
         <div className="form-group">
           <label htmlFor="amount">Amount</label>
           <input
-            type="number"
+            type="text"
             className="form-control"
             id="amount"
             value={amount}
-            onChange={(e) => setAmount(Number(e.target.value))}
+            onChange={(e) => setAmount(e.target.value)}
+            pattern="[0-9]*([.,][0-9]+)?"
+            inputMode="decimal"
           />
         </div>
         <div className="form-group">
