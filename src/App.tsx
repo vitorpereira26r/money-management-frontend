@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Navbar } from "./components/Navbar/Navbar"
 import { Login } from "./Pages/Login/Login"
 import { UserAccess } from "./Pages/User/UserAccess"
 import { RequireAuth } from "./contexts/Auth/RequiteAuth"
@@ -8,6 +7,7 @@ import { LandingPage } from "./Pages/LandingPage/LadingPage"
 import { Home } from "./Pages/Home/Home"
 import { TransactionsPage } from "./Pages/TransactionsPage/TransactionsPage"
 import { UserConfig } from "./Pages/UserConfig/UserConfig"
+import { Navbar } from "./components/Navbar/Navbar";
 
 function App() {
 

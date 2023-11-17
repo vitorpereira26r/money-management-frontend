@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { AuthContext } from '../../contexts/Auth/AuthContext'
+import React, { useContext } from 'react';
+import { AuthContext } from '../../contexts/Auth/AuthContext';
 
 export const Navbar: React.FC = () => {
   const auth = useContext(AuthContext);
@@ -11,17 +11,14 @@ export const Navbar: React.FC = () => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-dark bg-body-tertiary" data-bs-theme="dark">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
           <a className='navbar-brand' href="/">
             <img className="rounded float-start" src="/logo/icon.jpg" width="50" height="50" alt="logo" />
           </a>
           <a className="navbar-brand" href="/">Noteworthy Finance</a>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarToggleExternalContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <div className="d-flex flex-grow-1 justify-content-lg-start justify-content-between">
+            <ul className="navbar-nav">
               <li className="nav-item">
                 <a className="nav-link" aria-current="page" href="/home">Home</a>
               </li>
