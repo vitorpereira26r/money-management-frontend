@@ -2,8 +2,8 @@ import axios from "axios";
 import { TransactionCreateDto, TransactionEditDto } from "../entities/Transaction/Transaction";
 
 const api = axios.create({
-    //baseURL: "https://money-management1-3ec26d927640.herokuapp.com"
-    baseURL: "http://localhost:8080"
+    baseURL: "https://money-management1-3ec26d927640.herokuapp.com"
+    //baseURL: "http://localhost:8080"
 });
 
 export const transactionApi = () => ({
