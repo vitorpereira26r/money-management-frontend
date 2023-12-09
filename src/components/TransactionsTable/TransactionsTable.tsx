@@ -92,7 +92,7 @@ export const TransactionsTable: React.FC = () => {
           </div>
         </div>
       </div>
-      <table className="table table-hover border border-dark rounded p-3 mb-3">
+      <table className="table table-hover border rounded p-3 mb-3">
         <thead>
           <tr>
             <th scope="col" key="type">
