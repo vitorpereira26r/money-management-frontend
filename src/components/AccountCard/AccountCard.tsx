@@ -35,6 +35,7 @@ export const AccountCard: React.FC<Props> = ({ account, onDelete, onEdit}) => {
               type="button"
               className="btn btn-primary mx-1"
               onClick={editButtonClick}
+              data-cy={`edit-account-${account.id}-btn`}
             >
               Edit
             </button>
@@ -42,6 +43,7 @@ export const AccountCard: React.FC<Props> = ({ account, onDelete, onEdit}) => {
               type="button"
               className="btn btn-danger mx-1"
               onClick={deleteButtonClick}
+              data-cy={`delete-account-${account.id}-btn`}
             >
               Delete
             </button>

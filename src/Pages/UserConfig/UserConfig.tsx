@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/Auth/AuthContext';
 import { UserEditDto } from '../../entities/User/User';
 import { Modal } from '../../components/Modal/Modal';
+import { Navbar } from '../../components/Navbar/Navbar';
 
 export const UserConfig: React.FC = () => {
 
@@ -75,6 +76,8 @@ export const UserConfig: React.FC = () => {
   }
 
   return (
+    <>
+    <Navbar/>
     <div className="container mt-4">
         <h2>Configure User Info</h2>
         <div>
@@ -148,5 +151,6 @@ export const UserConfig: React.FC = () => {
             </div>
         </Modal>
     </div>
+    </>
   )
 }

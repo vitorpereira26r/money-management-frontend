@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://money-management1-3ec26d927640.herokuapp.com"
+    //baseURL: "https://money-management1-3ec26d927640.herokuapp.com"
+    baseURL: "http://localhost:8080"
 });
 
 export const categoryApi = () => ({

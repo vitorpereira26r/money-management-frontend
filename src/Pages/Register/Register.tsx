@@ -2,6 +2,7 @@ import React, { ChangeEvent, useContext, useState } from 'react'
 import { AuthContext } from '../../contexts/Auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { UserRegistration } from '../../entities/User/User';
+import { Navbar } from '../../components/Navbar/Navbar';
 
 export const Register: React.FC = () => {
   const auth = useContext(AuthContext);
@@ -50,6 +51,8 @@ export const Register: React.FC = () => {
   }
 
   return (
+    <>
+    <Navbar/>
     <div className="container">
       <h2 className='mt-2'>Register User</h2>
       <form onSubmit={handleSubmit}>
@@ -64,6 +67,7 @@ export const Register: React.FC = () => {
             name="username"
             value={username}
             onChange={handleUsernameInput}
+            data-cy={"register-username-input"}
             required
           />
           {!usernameLengthOk && (
@@ -83,6 +87,7 @@ export const Register: React.FC = () => {
             name="password"
             value={password}
             onChange={handlePasswordInput}
+            data-cy={"register-password-input"}
             required
           />
           {!passwordLengthOk && (
@@ -91,10 +96,11 @@ export const Register: React.FC = () => {
             </div>
           )}
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary" data-cy={"submit-register-btn"}>
           Register
         </button>
       </form>
     </div>
+    </>
   )
 }

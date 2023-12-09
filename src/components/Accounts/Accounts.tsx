@@ -139,7 +139,13 @@ export const Accounts: React.FC = () => {
   return (
     <div className="container mt-4">
       <h2>Accounts</h2>
-      <button className='btn btn-success mb-3' onClick={handleCreateButton}>Create Account</button>
+      <button
+        className='btn btn-success mb-3'
+        onClick={handleCreateButton}
+        data-cy={"create-account-btn"}
+      >
+        Create Account
+      </button>
       <div className="row">
         {accounts.map((account, index) => (
           <div key={index} className="col-md-4 mb-4">
@@ -153,7 +159,7 @@ export const Accounts: React.FC = () => {
           <p className="text-muted">Are you sure you want to delete this account?</p>
         </div>
         <div className="modal-footer">
-          <button type="button" className="btn btn-primary" onClick={handleConfirmDelete}>
+          <button type="button" className="btn btn-primary" onClick={handleConfirmDelete} data-cy={"delete-confirmation-account-btn"}>
             Confirm
           </button>
           <button type="button" className="btn btn-secondary" onClick={handleCancelDelete}>
@@ -172,6 +178,7 @@ export const Accounts: React.FC = () => {
               id="accountName"
               className="form-control"
               value={accountToEdit.name}
+              data-cy={"edit-account-input"}
               onChange={(e) => {
                 const newName = e.target.value;
                 setAccountToEdit((prevAccount) => {
@@ -196,7 +203,7 @@ export const Accounts: React.FC = () => {
             </button>
           ) : (
             <>
-              <button type="button" className="btn btn-primary" onClick={handleConfirmEdit}>
+              <button type="button" className="btn btn-primary" onClick={handleConfirmEdit} data-cy={"submit-account-edit-btn"}>
                 Confirm
               </button>
               <button type="button" className="btn btn-secondary" onClick={handleCancelEdit}>
@@ -217,6 +224,7 @@ export const Accounts: React.FC = () => {
               className="form-control"
               value={newAccountName}
               onChange={(e) => setNewAccountName(e.target.value)}
+              data-cy={"create-account-input"}
             />
           </div>
           {newAccountName.trim() === "" && (
@@ -230,7 +238,7 @@ export const Accounts: React.FC = () => {
             </button>
           ) : (
             <>
-              <button type="button" className="btn btn-primary" onClick={createAccount}>
+              <button type="button" className="btn btn-primary" onClick={createAccount} data-cy={"submit-account-create-btn"}>
                 Confirm
               </button>
               <button type="button" className="btn btn-secondary" onClick={handleCancelCreate}>

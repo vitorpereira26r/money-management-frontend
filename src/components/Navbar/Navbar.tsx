@@ -20,22 +20,22 @@ export const Navbar: React.FC = () => {
           <div className="d-flex flex-grow-1 justify-content-lg-start justify-content-between">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="/home">Home</a>
+                <a className="nav-link" aria-current="page" data-cy={"home-nav-link"} href="/home">Home</a>
               </li>
               {!auth.user && <li className='nav-item'>
-                <a className='nav-link' href="/login">Login</a>
+                <a className='nav-link' data-cy={"login-nav-link"} href="/login">Login</a>
               </li>}
               {!auth.user && <li className='nav-item'>
-                <a className='nav-link' href="/register">Register</a>
+                <a className='nav-link' data-cy={"register-nav-link"} href="/register">Register</a>
               </li>}
               {auth.user && <li className='nav-item'>
-                <a className='nav-link' href="/transactions">Transactions</a>
+                <a className='nav-link' data-cy={"transactions-nav-link"} href="/transactions">Transactions</a>
               </li>}
               {auth.user && <li className='nav-item'>
-                <a className='nav-link' href="/user-config">Setting</a>
+                <a className='nav-link' data-cy={"settings-nav-link"} href="/user-config">Setting</a>
               </li>}
               {auth.user && <li className="nav-item">
-                <a className="nav-link" href="/" onClick={handleLogout}>Logout</a>
+                <a className="nav-link" data-cy={"logout-nav-link"} href="/" onClick={handleLogout}>Logout</a>
               </li>}
             </ul>
           </div>

@@ -157,10 +157,10 @@ export const UserTransactions: React.FC = () => {
   return (
     <div className="container mt-4">
       <button className='btn btn-outline-secondary'>
-        <a href="/home" className='nav-link'>Back to home page</a>
+        <a href="/home" className='nav-link' data-cy={"back-home-btn"}>Back to home page</a>
       </button>
       <h2>{auth.user?.username}'s transactions</h2>
-      <button className="btn btn-success mb-3" onClick={openCreateModal}>Create Transaction</button>
+      <button className="btn btn-success mb-3" onClick={openCreateModal} data-cy={"create-transaction-btn"}>Create Transaction</button>
       <div className="row">
         <div className="col-md-4 mb-3">
           <div className="form-group">
@@ -247,12 +247,14 @@ export const UserTransactions: React.FC = () => {
                 <button
                     className="btn btn-primary"
                     onClick={() => openEditModal(transaction)}
+                    data-cy={`edit-transaction-${transaction.id}-btn`}
                 >
                     Edit
                 </button>{" "}
                 <button
                     className="btn btn-danger"
                     onClick={() => openDeleteModal(transaction)}
+                    data-cy={`delete-transaction-${transaction.id}-btn`}
                 >
                     Delete
                 </button>
@@ -267,7 +269,7 @@ export const UserTransactions: React.FC = () => {
           <p className="text-muted">Are you sure you want to delete this account?</p>
         </div>
         <div className="modal-footer">
-          <button type="button" className="btn btn-primary" onClick={handleDeleteConfirmation}>
+          <button type="button" className="btn btn-primary" onClick={handleDeleteConfirmation} data-cy={"delete-transaction-confirm-btn"}>
             Confirm
           </button>
           <button type="button" className="btn btn-secondary" onClick={closeDeleteModal}>

@@ -83,10 +83,11 @@ export const TransactionsTable: React.FC = () => {
               className="form-control"
               onChange={(e) => setSelectedType(e.target.value)}
               value={selectedType || ''}
+              data-cy={"type-filter-select-btn"}
             >
               <option value="">All</option>
-              <option value="EXPENSE">Expense</option>
-              <option value="INCOME">Income</option>
+              <option value="EXPENSE" data-cy={"type-filter-option-expense-btn"}>Expense</option>
+              <option value="INCOME" data-cy={"type-filter-option-income-btn"}>Income</option>
             </select>
           </div>
         </div>

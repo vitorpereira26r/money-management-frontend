@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useContext, useState } from 'react'
 import { AuthContext } from '../../contexts/Auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { Navbar } from '../../components/Navbar/Navbar';
 
 export const Login: React.FC = () => {
   const auth = useContext(AuthContext);
@@ -40,6 +41,8 @@ export const Login: React.FC = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="container">
       <h2 className='mt-2'>Login</h2>
       <form onSubmit={handleSubmit}>
@@ -54,6 +57,7 @@ export const Login: React.FC = () => {
             name="username"
             value={username}
             onChange={handleUsernameInput}
+            data-cy={"login-username-input"}
             required
           />
         </div>
@@ -68,10 +72,15 @@ export const Login: React.FC = () => {
             name="password"
             value={password}
             onChange={handlePasswordInput}
+            data-cy={"login-password-input"}
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          className="btn btn-primary"
+          data-cy={"submit-login-btn"}
+        >
           Login
         </button>
       </form>
@@ -84,5 +93,6 @@ export const Login: React.FC = () => {
           Fill the inputs
       </div>}
     </div>
+    </>
   )
 }

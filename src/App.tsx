@@ -7,13 +7,11 @@ import { LandingPage } from "./Pages/LandingPage/LadingPage"
 import { Home } from "./Pages/Home/Home"
 import { TransactionsPage } from "./Pages/TransactionsPage/TransactionsPage"
 import { UserConfig } from "./Pages/UserConfig/UserConfig"
-import { Navbar } from "./components/Navbar/Navbar";
 
 function App() {
 
   return (
     <div>
-      <Navbar/>
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage/>}/>

@@ -63,6 +63,7 @@ export const EditTransactionModal:React.FC<ModalProps> = ({
             id="amount"
             value={amount}
             onChange={(e) => setAmount(Number(e.target.value))}
+            data-cy={"edit-ammont-input"}
           />
         </div>
         <div className="form-group">
@@ -73,6 +74,7 @@ export const EditTransactionModal:React.FC<ModalProps> = ({
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            data-cy={"edit-description-input"}
           />
         </div>
         <div className="form-group">
@@ -82,10 +84,11 @@ export const EditTransactionModal:React.FC<ModalProps> = ({
             id="type"
             value={type}
             onChange={(e) => setType(e.target.value)}
+            data-cy={"type-options-select"}
           >
             <option value="">Select Type</option>
-            <option value="EXPENSE">Expense</option>
-            <option value="INCOME">Income</option>
+            <option value="EXPENSE" data-cy={"type-option-expense"}>Expense</option>
+            <option value="INCOME" data-cy={"type-option-income"}>Income</option>
           </select>
         </div>
         {!isFormValid && (
@@ -97,6 +100,7 @@ export const EditTransactionModal:React.FC<ModalProps> = ({
           type="button"
           className="btn btn-primary"
           onClick={submitEdit}
+          data-cy={"submit-edit-transaction-btn"}
         >
           Edit Transaction
         </button>

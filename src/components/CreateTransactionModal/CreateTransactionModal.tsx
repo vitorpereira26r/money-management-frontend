@@ -78,8 +78,8 @@ export const CreateTransactionModal: React.FC<ModalProps> = ({ title, isOpen, on
             userId: -1,
             categoryId: category.id
         };
+
         handleCreate(newTransaction);
-        setIsFormValid(true);
     }
     else{
       setIsFormValid(false);
@@ -101,6 +101,7 @@ export const CreateTransactionModal: React.FC<ModalProps> = ({ title, isOpen, on
             id="amount"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
+            data-cy={"create-ammont-input"}
             pattern="[0-9]*([.,][0-9]+)?"
             inputMode="decimal"
           />
@@ -113,6 +114,7 @@ export const CreateTransactionModal: React.FC<ModalProps> = ({ title, isOpen, on
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            data-cy={"create-description-input"}
           />
         </div>
         <div className="form-group">
@@ -126,10 +128,11 @@ export const CreateTransactionModal: React.FC<ModalProps> = ({ title, isOpen, on
               const selectedAccount = accounts.find((acc) => acc.id.toString() === selectedAccountId);
               setAccountToCreate(selectedAccount || null);
             }}
+            data-cy={"account-options-select"}
           >
             <option value="">Select Account</option>
             {accounts.map((acc) => (
-              <option key={acc.id} value={acc.id}>
+              <option key={acc.id} value={acc.id} data-cy={`account-option-${acc.name}`}>
                 {acc.name}
               </option>
             ))}
@@ -146,10 +149,11 @@ export const CreateTransactionModal: React.FC<ModalProps> = ({ title, isOpen, on
               const selectedCat = categories.find((cat) => cat.id.toString() === selectedCategoryId);
               setCategory(selectedCat || null);
             }}
+            data-cy={"category-options-select"}
           >
             <option value="">Select Category</option>
             {categories.map((cat) => (
-              <option key={cat.id} value={cat.id}>
+              <option key={cat.id} value={cat.id} data-cy={`category-option-${cat.id}`}>
                 {cat.name}
               </option>
             ))}
@@ -162,10 +166,11 @@ export const CreateTransactionModal: React.FC<ModalProps> = ({ title, isOpen, on
             id="type"
             value={type}
             onChange={(e) => setType(e.target.value)}
+            data-cy={"type-options-select"}
           >
             <option value="">Select Type</option>
-            <option value="EXPENSE">Expense</option>
-            <option value="INCOME">Income</option>
+            <option value="EXPENSE" data-cy={"type-option-expense"}>Expense</option>
+            <option value="INCOME" data-cy={"type-option-income"}>Income</option>
           </select>
         </div>
         {!isFormValid && (
@@ -176,6 +181,7 @@ export const CreateTransactionModal: React.FC<ModalProps> = ({ title, isOpen, on
         <button
           type="submit"
           className="btn btn-primary"
+          data-cy={"submit-transaction-btn"}
         >
           Create Transaction
         </button>
