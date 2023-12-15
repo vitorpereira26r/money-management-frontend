@@ -156,7 +156,7 @@ export const Accounts: React.FC = () => {
 
       <Modal title="Delete Confirmation" isOpen={isDeleteModalOpen} onClose={handleCancelDelete}>
         <div className="modal-body">
-          <p className="text-muted">Are you sure you want to delete this account?</p>
+          <p className="text-muted">Are you sure you want to delete this transaction?</p>
         </div>
         <div className="modal-footer">
           <button type="button" className="btn btn-primary" onClick={handleConfirmDelete} data-cy={"delete-confirmation-account-btn"}>

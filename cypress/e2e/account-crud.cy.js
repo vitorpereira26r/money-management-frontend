@@ -17,7 +17,7 @@ describe('template spec', () => {
 
     cy.wait(1000);
 
-    cy.get('[data-cy=create-account-input]').type("new bank");
+    cy.get('[data-cy=create-account-input]').type("new_bank");
 
     cy.wait(1000);
 
@@ -25,8 +25,8 @@ describe('template spec', () => {
 
     cy.wait(6000);
 
-    cy.get('[data-cy=edit-account-4-btn]').click();
-    cy.get('[data-cy=edit-account-input]').type(" edited");
+    cy.get('[data-cy=edit-account-new_bank-btn]').click();
+    cy.get('[data-cy=edit-account-input]').clear().type("edited");
 
     cy.wait(1000);
 
@@ -34,7 +34,7 @@ describe('template spec', () => {
 
     cy.wait(6000);
 
-    cy.get('[data-cy=delete-account-4-btn]').click();
+    cy.get('[data-cy=delete-account-edited-btn]').click();
 
     cy.wait(2000);
 

@@ -19,7 +19,7 @@ describe('template spec', () => {
 
     cy.wait(1000);
 
-    cy.get('[data-cy=create-account-input]').type("new bank test");
+    cy.get('[data-cy=create-account-input]').type("new_bank_test");
 
     cy.wait(1000);
 
@@ -38,7 +38,7 @@ describe('template spec', () => {
     cy.get('[data-cy=create-ammont-input]').type(200);
     cy.get('[data-cy=create-description-input]').type("description income");
 
-    cy.get('[data-cy=account-options-select]').select("new bank test");
+    cy.get('[data-cy=account-options-select]').select("new_bank_test");
 
     cy.get('[data-cy=category-options-select]').select("Earn");
 
@@ -65,7 +65,7 @@ describe('template spec', () => {
     cy.get('[data-cy=create-ammont-input]').type(100);
     cy.get('[data-cy=create-description-input]').type("description expense");
 
-    cy.get('[data-cy=account-options-select]').select("new bank test");
+    cy.get('[data-cy=account-options-select]').select("new_bank_test");
 
     cy.get('[data-cy=category-options-select]').select("Buy");
 
@@ -91,8 +91,7 @@ describe('template spec', () => {
     cy.get('[data-cy=edit-transaction-2-btn]').click();
 
     cy.wait(2000);
-
-    cy.get('[data-cy=edit-ammont-input]').clear().type(10);
+    
     cy.get('[data-cy=edit-description-input]').clear().type("new description");
 
     cy.wait(4000);
@@ -213,7 +212,7 @@ describe('template spec', () => {
     cy.wait(6000);
 
     // delete the account
-    cy.get('[data-cy=delete-account-2-btn]').click();
+    cy.get('[data-cy=delete-account-new_bank_test-btn]').click();
 
     cy.wait(2000);
 

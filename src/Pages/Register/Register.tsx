@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useContext, useState } from 'react'
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../contexts/Auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { UserRegistration } from '../../entities/User/User';
@@ -13,6 +13,35 @@ export const Register: React.FC = () => {
 
   const[usernameLengthOk, setUsernameLengthOk] = useState<boolean>(true);
   const[passwordLengthOk, setPasswordLengthOk] = useState<boolean>(true);
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const delay = setTimeout(() => {
+        setIsLoading(false);
+    }, 700);
+
+    return () => clearTimeout(delay);
+  }, []);
+
+  if(auth.user !== null){
+    console.log("auth.user=true")
+    setIsLoading(true);
+    navigate("/home");
+  }
+
+  if (isLoading) {
+    return (
+        <div
+            className="position-fixed w-100 h-100 d-flex justify-content-center align-items-center"
+            style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}
+        >
+            <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    );
+  }
 
   const handleUsernameInput = (event: ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);

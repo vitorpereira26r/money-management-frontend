@@ -29,7 +29,6 @@ export const RequireAuth = ({ children }: { children: JSX.Element }) => {
     }
 
     if(!auth.user){
-        console.log("!auth.user")
         //navigate("/login");
         return <Login/>;
     }
