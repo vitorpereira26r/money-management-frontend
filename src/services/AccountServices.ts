@@ -2,9 +2,9 @@ import axios from "axios";
 import { Account, CreateAccountDto } from "../entities/Account/Account";
 
 const api = axios.create({
-    //baseURL: "https://money-management1-3ec26d927640.herokuapp.com"
+    baseURL: "https://money-management1-3ec26d927640.herokuapp.com"
     //baseURL: "http://localhost:8080"
-    baseURL: "http://ec2-3-91-150-67.compute-1.amazonaws.com:8080"
+    //baseURL: "http://ec2-3-91-150-67.compute-1.amazonaws.com:8080"
 });
 
 export const accountApi = () => ({
