@@ -1,11 +1,10 @@
 ## how to start the application
 
+# create a .env file with the API url
+VITE_API_URL={URL}
+
+# running
 npm run dev
-
-## how to start the cypress
-
-npx cypress open
-
 
 ## run the application using docker
 
@@ -16,4 +15,10 @@ docker-compose up --build -d
 docker-compose down
 
 # see applications logs
+
 docker-compose logs -f
+
+
+## how to start the cypress
+
+npx cypress open
