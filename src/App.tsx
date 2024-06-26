@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter basename="/moneymanagement">
         <Router>
           <Routes>
             <Route path="/" element={<LandingPage/>}/>
