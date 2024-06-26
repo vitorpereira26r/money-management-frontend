@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Account } from '../../entities/Account/Account';
 import { Category } from '../../entities/Category/Category';
 import { Modal } from '../Modal/Modal';
 import { accountApi } from '../../services/AccountServices';
-import { AuthContext } from '../../contexts/Auth/AuthContext';
 import { categoryApi } from '../../services/CategoryServices';
 import { TransactionCreateDto } from '../../entities/Transaction/Transaction';
 
@@ -16,7 +15,6 @@ interface ModalProps {
 
 export const CreateTransactionModal: React.FC<ModalProps> = ({ title, isOpen, onClose, handleCreate }) => {
 
-  const auth = useContext(AuthContext);
   const accApi = accountApi();
   const catApi = categoryApi();
 
@@ -45,12 +43,9 @@ export const CreateTransactionModal: React.FC<ModalProps> = ({ title, isOpen, on
         }
     }
     const getAccounts = async () => {
-      const id = auth.user?.id;
-      if (id) {
-        const data = await accApi.getAccountsByUserId(id);
-        if (data) {
-          setAccounts(data);
-        }
+      const data = await accApi.getAccounts();
+      if (data) {
+        setAccounts(data);
       }
     };
     getAccounts();
@@ -75,7 +70,6 @@ export const CreateTransactionModal: React.FC<ModalProps> = ({ title, isOpen, on
             amount: parsedAmount,
             description: description,
             accountId: accountToCreate?.id,
-            userId: -1,
             categoryId: category.id
         };
 

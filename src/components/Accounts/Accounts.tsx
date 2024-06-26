@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AccountCard } from '../AccountCard/AccountCard';
 import { Account } from '../../entities/Account/Account';
-import { AuthContext } from '../../contexts/Auth/AuthContext';
 import { accountApi } from '../../services/AccountServices';
 import { Modal } from '../Modal/Modal'; 
 
 export const Accounts: React.FC = () => {
-  const auth = useContext(AuthContext);
   const api = accountApi();
 
   const [accounts, setAccounts] = useState<Account[]>([]);
@@ -20,12 +18,9 @@ export const Accounts: React.FC = () => {
 
   useEffect(() => {
     const getAccounts = async () => {
-      const id = auth.user?.id;
-      if (id) {
-        const data = await api.getAccountsByUserId(id);
-        if (data) {
-          setAccounts(data);
-        }
+      const data = await api.getAccounts();
+      if (data) {
+        setAccounts(data);
       }
     };
     getAccounts();
@@ -115,21 +110,17 @@ export const Accounts: React.FC = () => {
 
   const createAccount = async () => {
     if(newAccountName !== ""){
-      const userId = auth.user?.id;
+      try{
+        const response = await api.createAccount(newAccountName);
 
-      if(userId){
-        try{
-          const response = await api.createAccount(newAccountName, userId);
+        if(response && response.status === 200){
+          const newAccount: Account = response.data;
 
-          if(response && response.status === 200){
-            const newAccount: Account = response.data;
-
-            setAccounts([...accounts, newAccount]);
-          }
+          setAccounts([...accounts, newAccount]);
         }
-        catch(error){
-          console.error("Erro ao atualizar a conta:", error);
-        }
+      }
+      catch(error){
+        console.error("Erro ao atualizar a conta:", error);
       }
     }
     setNewAccountName("");

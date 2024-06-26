@@ -3,7 +3,7 @@ import { User, UserEditDto, UserRegistration } from '../../entities/User/User';
 
 export type AuthContextType = {
     user: User | null;
-    register: (user: UserRegistration) => Promise<boolean>;
+    register: (user: UserRegistration) => Promise<string>;
     login: (username: string, password: string) => Promise<boolean>;
     logout: () => void;
     editUser: (user: UserEditDto, id: number) => Promise<boolean>;

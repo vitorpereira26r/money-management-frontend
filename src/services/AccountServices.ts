@@ -2,29 +2,23 @@ import axios from "axios";
 import { Account, CreateAccountDto } from "../entities/Account/Account";
 
 const api = axios.create({
-    baseURL: "https://money-management1-3ec26d927640.herokuapp.com"
-    //baseURL: "http://localhost:8080"
-    //baseURL: "http://ec2-3-91-150-67.compute-1.amazonaws.com:8080"
+    baseURL: import.meta.env.VITE_API_URL
 });
 
 export const accountApi = () => ({
-    createAccount: async (name: string, userId: number) => {
+    createAccount: async (name: string) => {
 
         const token = localStorage.getItem("token");
 
         const newAccount: CreateAccountDto = {
-            name: name,
-            userId: userId
+            name: name
         }
 
-        const response = await api.post("/app/account/create", newAccount, {
+        const response = await api.post("/app/account", newAccount, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
-
-        console.log(response.status);
-        console.log(response.data);
 
         if(response && response.status === 200 && response.data){
             return response;
@@ -32,18 +26,15 @@ export const accountApi = () => ({
         return null;
     },
 
-    getAccountsByUserId: async (id: number) => {
+    getAccounts: async () => {
 
         const token = localStorage.getItem("token");
 
-        const response = await api.get("/app/accounts/user-id/" + id, {
+        const response = await api.get("/app/account", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
-
-        console.log(response.status);
-        console.log(response.data);
 
         if(response.status === 200 && response.data){
             return response.data;
@@ -55,14 +46,11 @@ export const accountApi = () => ({
 
         const token = localStorage.getItem("token");
 
-        const response = await api.put("/app/account/edit/" + account.id, account, {
+        const response = await api.put("/app/account/" + account.id, account, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
-
-        console.log(response.status);
-        console.log(response.data);
 
         if(response.status === 200 && response.data){
             return response;
@@ -74,14 +62,11 @@ export const accountApi = () => ({
 
         const token = localStorage.getItem("token");
 
-        const response = await api.delete("/app/account/delete/" + id, {
+        const response = await api.delete("/app/account/" + id, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
-
-        console.log(response.status);
-        console.log(response.data);
 
         return response;
     }

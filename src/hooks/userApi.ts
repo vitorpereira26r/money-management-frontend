@@ -1,26 +1,20 @@
 import axios from "axios";
 import { UserEditDto, UserRegistration } from "../entities/User/User";
 
+//console.log("Base URL:", process.env.REACT_APP_API_URL);
+
 const api = axios.create({
-    baseURL: "https://money-management1-3ec26d927640.herokuapp.com"
-    //baseURL: "http://localhost:8080"
-    //baseURL: "http://ec2-3-91-150-67.compute-1.amazonaws.com:8080"
+    baseURL: import.meta.env.VITE_API_URL
 });
 
 export const userApi = () => ({
     validadeToken: async (token: string) => {
-        const userId = localStorage.getItem("userId");
 
-        console.log("User id: " + userId)
-
-        const response = await api.get("/user/validate/" + userId, {
+        const response = await api.get("/user", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
-
-        console.log(response.status);
-        console.log(response.data);
         
         if(response.status === 200 && response.data){
             return response.data;
@@ -31,16 +25,13 @@ export const userApi = () => ({
     register: async (user: UserRegistration) => {
         const response = await api.post("/auth/register", user);
 
-        console.log(response);
-
         if(response.status === 200){
-            return true;
+            return response.data.username;
         }
-        return false;
+        return "";
     },
 
     login: async (username: string, password: string) => {
-        console.log("userApi login");
         const response = await api.post("/auth/login", { username, password });
         return response.data;
     },
@@ -53,14 +44,11 @@ export const userApi = () => ({
 
         const token = localStorage.getItem("token");
 
-        const response = await api.put("/user/edit/" + id, user, {
+        const response = await api.put("/user/" + id, user, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
-
-        console.log(response.status);
-        console.log(response.data);
 
         if(response && response.status === 200 && response.data){
             return response.data;
@@ -72,14 +60,11 @@ export const userApi = () => ({
 
         const token = localStorage.getItem("token");
 
-        const response = await api.delete("/user/delete/" + id, {
+        const response = await api.delete("/user/" + id, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
-
-        console.log(response.status);
-        console.log(response.data);
 
         return response;
     }

@@ -50,7 +50,6 @@ export const LandingPage: React.FC = () => {
     <Navbar/>
     <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
       <div className="d-flex flex-column justify-content-center align-items-center text-center" style={{ minWidth: '100%' }}>
-        <h2>Welcome to the Noteworthy Finance</h2>
         <button
           type="button"
           onClick={handleLoginClick}

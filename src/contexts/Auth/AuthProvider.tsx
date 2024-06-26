@@ -12,7 +12,6 @@ export const AuthProvider = ({ children }: {children: JSX.Element}) => {
             const storageData = localStorage.getItem("token");
             if(storageData){
                 const data = await api.validadeToken(storageData);
-                console.log(data);
                 if(data){
                     setUser(data);
                 }
@@ -22,14 +21,11 @@ export const AuthProvider = ({ children }: {children: JSX.Element}) => {
     }, []);
 
     const login = async (username: string, password: string) =>{
-        console.log("username: " + username + ", password: " + password);
         const data: UserLoginResponse = await api.login(username, password);
 
         if(data.user === null){
             return false;
         }
-
-        console.log(data)
 
         if(data.user && data.token){
             setUser(data.user);
@@ -41,7 +37,6 @@ export const AuthProvider = ({ children }: {children: JSX.Element}) => {
     }
     
     const register = async (user: UserRegistration) => {
-        console.log(user);
         const data = await api.register(user);
 
         console.log(data);
@@ -53,7 +48,6 @@ export const AuthProvider = ({ children }: {children: JSX.Element}) => {
         const data = await api.editUser(user, id);
 
         if(data){
-            console.log("user edited: " + data.username);
             userEditData(data.username, data.password);
             return true;
         }

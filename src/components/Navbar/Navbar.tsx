@@ -13,10 +13,7 @@ export const Navbar: React.FC = () => {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <a className='navbar-brand' href="/">
-            <img className="rounded float-start" src="/logo/icon.jpg" width="50" height="50" alt="logo" />
-          </a>
-          <a className="navbar-brand" href="/">Noteworthy Finance</a>
+          <a className="navbar-brand" href="/">Money Management</a>
           <div className="d-flex flex-grow-1 justify-content-lg-start justify-content-between">
             <ul className="navbar-nav">
               <li className="nav-item">

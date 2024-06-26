@@ -2,9 +2,7 @@ import axios from "axios";
 import { TransactionCreateDto, TransactionEditDto } from "../entities/Transaction/Transaction";
 
 const api = axios.create({
-    baseURL: "https://money-management1-3ec26d927640.herokuapp.com"
-    //baseURL: "http://localhost:8080"
-    //baseURL: "http://ec2-3-91-150-67.compute-1.amazonaws.com:8080"
+    baseURL: import.meta.env.VITE_API_URL
 });
 
 export const transactionApi = () => ({
@@ -12,14 +10,11 @@ export const transactionApi = () => ({
 
         const token = localStorage.getItem("token");
 
-        const response = await api.post("/app/transaction/create", newTransaction, {
+        const response = await api.post("/app/transaction", newTransaction, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
-
-        console.log(response.status);
-        console.log(response.data);
 
         if(response && response.status === 200 && response.data){
             return response.data;
@@ -27,18 +22,15 @@ export const transactionApi = () => ({
         return null;
     },
 
-    getTransactionsByUserId: async (id: number) => {
+    getTransactions: async () => {
 
         const token = localStorage.getItem("token");
 
-        const response = await api.get("/app/transactions/user-id/" + id, {
+        const response = await api.get("/app/transaction", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
-
-        console.log(response.status);
-        console.log(response.data);
 
         if(response.status === 200 && response.data){
             return response.data;
@@ -50,14 +42,11 @@ export const transactionApi = () => ({
 
         const token = localStorage.getItem("token");
 
-        const response = await api.get("/app/transactions/account-id/" + id, {
+        const response = await api.get("/app/transactions/" + id, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
-
-        console.log(response.status);
-        console.log(response.data);
 
         if(response.status === 200 && response.data){
             return response.data;
@@ -69,14 +58,11 @@ export const transactionApi = () => ({
 
         const token = localStorage.getItem("token");
 
-        const response = await api.put("/app/transaction/edit/" + id, transaction, {
+        const response = await api.put("/app/transaction/" + id, transaction, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
-
-        console.log(response.status);
-        console.log(response.data);
 
         if(response.status === 200 && response.data){
             return response.data;
@@ -88,14 +74,11 @@ export const transactionApi = () => ({
 
         const token = localStorage.getItem("token");
 
-        const response = await api.delete("/app/transaction/delete/" + id, {
+        const response = await api.delete("/app/transaction/" + id, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
-
-        console.log(response.status);
-        console.log(response.data);
 
         return response;
     }

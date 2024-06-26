@@ -17,23 +17,16 @@ export const TransactionsTable: React.FC = () => {
 
   useEffect(() => {
     const getTransactions = async () => {
-      const id = auth.user?.id;
-
-      if (id) {
-        const data = await api.getTransactionsByUserId(id);
-        if (data) {
-          setTransactions(data);
-        }
+      const data = await api.getTransactions();
+      if (data) {
+        setTransactions(data);
       }
     };
 
     const getAccounts = async () => {
-      const id = auth.user?.id;
-      if (id) {
-        const data = await accApi.getAccountsByUserId(id);
-        if (data) {
-          setAccounts(data);
-        }
+      const data = await accApi.getAccounts();
+      if (data) {
+        setAccounts(data);
       }
     };
 

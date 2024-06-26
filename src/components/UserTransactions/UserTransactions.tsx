@@ -28,23 +28,16 @@ export const UserTransactions: React.FC = () => {
 
   useEffect(() => {
     const getTransactions = async () => {
-      const id = auth.user?.id;
-
-      if (id) {
-        const data = await api.getTransactionsByUserId(id);
-        if (data) {
-          setTransactions(data);
-        }
+      const data = await api.getTransactions();
+      if (data) {
+        setTransactions(data);
       }
     };
 
     const getAccounts = async () => {
-      const id = auth.user?.id;
-      if (id) {
-        const data = await accApi.getAccountsByUserId(id);
-        if (data) {
-          setAccounts(data);
-        }
+      const data = await accApi.getAccounts();
+      if (data) {
+        setAccounts(data);
       }
     };
 
@@ -57,22 +50,20 @@ export const UserTransactions: React.FC = () => {
   }
 
   const handleCreateTransaction = async (newTransaction: TransactionCreateDto) => {
-    if(newTransaction && auth.user?.id){
-        newTransaction.userId = auth.user.id;
+    if(newTransaction){
+      try{
+          const response = await api.createTransaction(newTransaction);
 
-        try{
-            const response = await api.createTransaction(newTransaction);
+          if(response !== null){
+              const transaction: Transaction = response;
 
-            if(response !== null){
-                const transaction: Transaction = response;
-
-                setTransactions([...transactions, transaction]);
-            }
-        }
-        catch(error){
-            console.error("Erro ao atualizar a conta:", error);
-        }
-        closeCreateModal();
+              setTransactions([...transactions, transaction]);
+          }
+      }
+      catch(error){
+          console.error("Erro ao atualizar a conta:", error);
+      }
+      closeCreateModal();
     }
   }
 

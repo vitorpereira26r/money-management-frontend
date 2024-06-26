@@ -1,9 +1,12 @@
 import React, { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../contexts/Auth/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar/Navbar';
 
 export const Login: React.FC = () => {
+  const location = useLocation();
+  const usernameCreated = location.state?.username || '';
+
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -12,9 +15,15 @@ export const Login: React.FC = () => {
   const[showAlert, setShowAlert] = useState<boolean>(false);
   const[inputNotFilled, setInputNotFilled] = useState<boolean>(false);
 
+  const[showPassword, setShowPassword] = useState<boolean>(false);
+
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    if(usernameCreated !== ""){
+      setUsername(usernameCreated);
+    }
+
     const delay = setTimeout(() => {
         setIsLoading(false);
     }, 700);
@@ -22,11 +31,13 @@ export const Login: React.FC = () => {
     return () => clearTimeout(delay);
   }, []);
 
-  if(auth.user !== null){
-    console.log("auth.user=true")
-    setIsLoading(true);
-    navigate("/home");
-  }
+  useEffect(() => {
+    if(auth.user !== null){
+      setIsLoading(true);
+      navigate("/home");
+    }
+  }, [auth.user, navigate])
+
 
   if (isLoading) {
     return (
@@ -47,6 +58,10 @@ export const Login: React.FC = () => {
 
   const handlePasswordInput = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
+  }
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -74,6 +89,11 @@ export const Login: React.FC = () => {
     <Navbar/>
     <div className="container">
       <h2 className='mt-2'>Login</h2>
+      {usernameCreated && (
+        <div className="alert alert-success mt-3" role="alert">
+          Your account has been created with the username: <strong>{usernameCreated}</strong>
+        </div>
+      )}
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="username" className="form-label">
@@ -94,16 +114,25 @@ export const Login: React.FC = () => {
           <label htmlFor="password" className="form-label">
             Password
           </label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            name="password"
-            value={password}
-            onChange={handlePasswordInput}
-            data-cy={"login-password-input"}
-            required
-          />
+          <div className='input-group'>
+            <input
+              type={showPassword ? "text" : "password"}
+              className="form-control"
+              id="password"
+              name="password"
+              value={password}
+              onChange={handlePasswordInput}
+              data-cy={"login-password-input"}
+              required
+            />
+            <button
+              type="button"
+              className="btn btn-outline-secondary"
+              onClick={toggleShowPassword}
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>
         </div>
         <button
           type="submit"

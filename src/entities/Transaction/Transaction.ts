@@ -18,7 +18,6 @@ export type TransactionCreateDto = {
     amount: number,
     description: string,
     accountId: number,
-    userId: number,
     categoryId: number
 }
 

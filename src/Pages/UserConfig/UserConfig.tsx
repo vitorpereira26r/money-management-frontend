@@ -13,6 +13,8 @@ export const UserConfig: React.FC = () => {
   const[username, setUsername] = useState<string>("");
   const[password, setPassword] = useState<string>("");
 
+  const[showPassword, setShowPassword] = useState<boolean>(false);
+
   const[isDeleteModalOpen, setIsDeleteModalOpen] =useState(false);
   
   const[usernameLengthOk, setUsernameLengthOk] = useState<boolean>(true);
@@ -32,6 +34,10 @@ export const UserConfig: React.FC = () => {
   const handlePasswordInput = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
     setPasswordLengthOk(true);
+  }
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
   }
 
   const openDeleteModal = () => {
@@ -106,15 +112,24 @@ export const UserConfig: React.FC = () => {
                     <label htmlFor="password" className="form-label">
                         Password
                     </label>
-                    <input
-                        type="password"
-                        className={`form-control ${!passwordLengthOk ? "is-invalid" : ""} mb-2`}
-                        id="password"
-                        name="password"
-                        value={password}
-                        onChange={handlePasswordInput}
-                        required
-                    />
+                    <div className='input-group mb-2'>
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            className={`form-control ${!passwordLengthOk ? "is-invalid" : ""}`}
+                            id="password"
+                            name="password"
+                            value={password}
+                            onChange={handlePasswordInput}
+                            required
+                        />
+                        <button
+                            type="button"
+                            className="btn btn-outline-secondary"
+                            onClick={toggleShowPassword}
+                        >
+                            {showPassword ? "Hide" : "Show"}
+                        </button>
+                    </div>
                     {!passwordLengthOk && (
                         <div className="alert alert-danger" role="alert">
                         Password must have between 8 and 40 characters.

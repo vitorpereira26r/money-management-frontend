@@ -6,5 +6,4 @@ export type Account = {
 
 export type CreateAccountDto = {
     name: string,
-    userId: number
 }
