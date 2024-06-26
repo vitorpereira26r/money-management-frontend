@@ -10,6 +10,8 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
+RUN chmod -R 777 /app/node_modules
+
 # Copy the rest of the application code to the working directory
 COPY . .
 
