@@ -3,7 +3,7 @@ services:
   web:
     build: .
     ports:
-      - "5172:5172"
+      - "5173:5173"
     volumes:
       - .:/app
       - /app/node_modules

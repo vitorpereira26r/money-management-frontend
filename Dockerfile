@@ -15,7 +15,7 @@ RUN chmod -R 777 /app/node_modules
 # Copy the rest of the application code to the working directory
 COPY . .
 
-EXPOSE 5172
+EXPOSE 5173
 
 # Command to run the application
 CMD ["npm", "run", "dev"]

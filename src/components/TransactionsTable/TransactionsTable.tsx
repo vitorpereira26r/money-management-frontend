@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/Auth/AuthContext';
 import { transactionApi } from '../../services/TransactionsServices';
+import { formatBackendDate } from '../../utils/DateFormatting';
 import { Transaction } from '../../entities/Transaction/Transaction';
 import { Account } from '../../entities/Account/Account';
 import { accountApi } from '../../services/AccountServices';
@@ -139,15 +140,3 @@ export const TransactionsTable: React.FC = () => {
   );
 }
 
-function formatBackendDate(dateStringFromBackend: string): string {
-  const dateObject = new Date(dateStringFromBackend);
-
-  const year = dateObject.getUTCFullYear();
-  const month = (dateObject.getUTCMonth() + 1).toString().padStart(2, '0');
-  const day = dateObject.getUTCDate().toString().padStart(2, '0');
-  const hours = dateObject.getUTCHours().toString().padStart(2, '0');
-  const minutes = dateObject.getUTCMinutes().toString().padStart(2, '0');
-  const seconds = dateObject.getUTCSeconds().toString().padStart(2, '0');
-
-  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-}
