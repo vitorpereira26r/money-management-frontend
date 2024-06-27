@@ -12,19 +12,17 @@ function App() {
 
   return (
     <div>
-      <BrowserRouter basename="/moneymanagement">
-        <Router>
-          <Routes>
-            <Route path="/" element={<LandingPage/>}/>
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/register" element={<Register/>}/>
-            <Route path="/user" element={<RequireAuth><UserAccess/></RequireAuth>}/>
-            <Route path="/home" element={<RequireAuth><Home/></RequireAuth>}/>
-            <Route path="/transactions" element={<RequireAuth><TransactionsPage/></RequireAuth>}/>
-            <Route path="/user-config" element={<RequireAuth><UserConfig/></RequireAuth>}/>
-          </Routes>
-        </Router>
-      </BrowserRouter>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/register" element={<Register/>}/>
+          <Route path="/user" element={<RequireAuth><UserAccess/></RequireAuth>}/>
+          <Route path="/home" element={<RequireAuth><Home/></RequireAuth>}/>
+          <Route path="/transactions" element={<RequireAuth><TransactionsPage/></RequireAuth>}/>
+          <Route path="/user-config" element={<RequireAuth><UserConfig/></RequireAuth>}/>
+        </Routes>
+      </Router>
     </div>
   )
 }
