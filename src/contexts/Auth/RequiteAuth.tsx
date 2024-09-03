@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from "./AuthContext";
-import { Login } from '../../Pages/Login/Login';
+import { useNavigate } from 'react-router-dom';
 
 export const RequireAuth = ({ children }: { children: JSX.Element }) => {
 
     const auth = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(true);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const delay = setTimeout(() => {
@@ -14,6 +16,12 @@ export const RequireAuth = ({ children }: { children: JSX.Element }) => {
 
         return () => clearTimeout(delay);
     }, []);
+
+    useEffect(() => {
+        if (!isLoading && !auth.user) {
+            navigate("/login");
+        }
+    }, [isLoading, auth.user, navigate]);
 
     if (isLoading) {
         return (
@@ -28,10 +36,5 @@ export const RequireAuth = ({ children }: { children: JSX.Element }) => {
         );
     }
 
-    if(!auth.user){
-        //navigate("/login");
-        return <Login/>;
-    }
-
-    return children;
+    return auth.user ? children : null;
 }

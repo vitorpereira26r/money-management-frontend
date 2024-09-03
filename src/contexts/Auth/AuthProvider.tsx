@@ -60,7 +60,8 @@ export const AuthProvider = ({ children }: {children: JSX.Element}) => {
                 username: username,
                 password: password,
                 balance: user?.balance,
-                id: user?.id
+                id: user?.id,
+                authorities: user?.authorities
             }
 
             console.log("newUserEdit: " + newUser);

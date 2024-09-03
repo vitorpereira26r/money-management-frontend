@@ -3,7 +3,13 @@ export type User = {
     id: number,
     username: string,
     password: string,
-    balance: number
+    balance: number,
+    authorities: Authority[]
+}
+
+export type Authority = {
+    id: number,
+    authority: string
 }
 
 export type UserLogin = {

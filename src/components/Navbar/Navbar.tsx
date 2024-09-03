@@ -34,6 +34,9 @@ export const Navbar: React.FC = () => {
               {auth.user && <li className="nav-item">
                 <a className="nav-link" data-cy={"logout-nav-link"} href="/" onClick={handleLogout}>Logout</a>
               </li>}
+              {auth.user && <li className="nav-item">
+                <a className="nav-link" data-cy={"logout-nav-link"} href="/admin" onClick={handleLogout}>Admin</a>
+              </li>}
             </ul>
           </div>
         </div>
